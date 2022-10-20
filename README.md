@@ -1,5 +1,8 @@
 # hackathon 2022 - Slug Slaughter
-## Zespół: łobuziaczki, Lider: Michał Pietruszewski
+## Zespół: łobuziaczki:
+Lider i główny programista: Michał Pietruszewski,
+Doradca Kreatywny: Bartosz Bartocha,
+Grafika: Przemysław Smyczek
 ### Sterowanie
 ####  Klawiatura:
 skok - spacja
