@@ -1,7 +1,7 @@
 # hackathon 2022 - Slug Slaughter
 ## Zespół: łobuziaczki, Lider: Michał Pietruszewski
 ### Sterowanie
-####Klawiatura:
+####  Klawiatura:
 skok - spacja
 ruch - WASD
 strzał - shift
@@ -15,6 +15,6 @@ kierunek działa - prawa gałka
 ### Opis Gry
 Slug Slaughter, bo tak właściwie nazywa się gra to bardzo prosta platwormówka - strzelanka. Nie posiada ściśle określonych zadań czy celów, po prostu morduj ślimaki.
 ### FAQ
-####Q: Jak wyjść z gry?
-####A: To jest ten zabawny moment.   Nie możesz.
+#### Q: Jak wyjść z gry?
+#### A: To jest ten zabawny moment.   Nie możesz.
 ##### Kliknij alt+f4 ;)
