@@ -3,13 +3,20 @@
 ### Sterowanie
 ####  Klawiatura:
 skok - spacja
+
 ruch - WASD
+
 strzał - shift
+
 kierunek działa - strzałki
+
 #### Dowolny pad do gier posiadający cztery przyciski, dwie  gałki i dwa spusty:
 skok - przycisk południowy 
+
 ruch - lewa gałka
+
 strzał - prawy spust
+
 kierunek działa - prawa gałka
 ##### UWAGA: menu główne gry nie wspiera kontrolera.
 ### Opis Gry
