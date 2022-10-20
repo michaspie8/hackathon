@@ -10,8 +10,8 @@ public class PlayerControler : MonoBehaviour
     public Vector2 aim;
     public float moveSpeedMultipler;
     public Animator anim;
-    bool shootButton;
-    bool jumpButton;
+    public bool shootButton;
+    public bool jumpButton;
     public float jumpMultipler;
     
 
@@ -24,7 +24,7 @@ public class PlayerControler : MonoBehaviour
 
 public void Awake()
     {
-        GameManager.instance.controls.Player.Enable();
+        
         GameManager.instance.controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         GameManager.instance.controls.Player.Movement.canceled += ctx => move = Vector2.zero;
         GameManager.instance.controls.Player.Jump.started += ctx => jumpButton = true;
