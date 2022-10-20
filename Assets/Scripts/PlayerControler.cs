@@ -10,6 +10,7 @@ public class PlayerControler : MonoBehaviour
     public Vector2 aim;
     public float moveSpeedMultipler;
     public Animator anim;
+    public Animator anim2;
     public bool shootButton;
     public bool jumpButton;
     public float jumpMultipler;
@@ -82,8 +83,77 @@ public void Start()
     // Update is called once per frame
     void Update()
     {
+        
+        Debug.Log(aim);
         UpdateMoveAndAnimate();
-        firePoint.eulerAngles = new(firePoint.eulerAngles.x, Vector2.Angle(Vector2.zero, aim), firePoint.eulerAngles.z);
+        Vector2 norAim = new(0,0);
+        if(aim.x != 0)
+        {
+            if (aim.x > 0)
+            {
+                norAim.x = 1;
+            }
+            else
+            {
+                norAim.x = -1;
+            }
+        }
+        if (aim.y != 0)
+        {
+            if (aim.y > 0)
+            {
+                norAim.y = 1;
+            }
+            else
+            {
+                norAim.y = -1;
+            }
+        }
+        //firePoint.rotation = Quaternion.LookRotation(new(0, 0, norAim.y + norAim.x));
+        Debug.Log("aim: "+norAim);
+        anim2.SetFloat("aim-x", norAim.x);
+        anim2.SetFloat("aim-y", norAim.y);
+        float newAim = 0;
+        if (norAim.x > norAim.y)
+        {
+            if (norAim.y > 0)
+            {
+                newAim = 90;
+            }
+            else
+            {
+                newAim = 180;
+            }
+            if (norAim.x > 0)
+            {
+               
+                newAim = 0;
+            }
+            else
+            {
+                newAim = 270;
+            }
+        }
+        else
+        {
+            if (norAim.x > 0)
+            {
+                newAim = 90;
+            }
+            else
+            {
+                newAim = 270;
+            }
+            if (norAim.y > 0)
+            {
+                newAim = 0;
+            }
+            else
+            {
+                newAim = 180;
+            }
+        }
+        firePoint.eulerAngles = new(firePoint.eulerAngles.x, firePoint.eulerAngles.y, newAim);
     }
     void Fire()
     {
@@ -92,8 +162,6 @@ public void Start()
     void UpdateMoveAndAnimate()
     {
         anim.SetFloat("move-x", move.x);
-        Debug.Log("isGrounded: "+IsGrounded);
-        Debug.Log("jump :"+jumpButton);
         move = move.normalized;
         /*if (false)
         {
