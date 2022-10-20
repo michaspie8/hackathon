@@ -14,7 +14,7 @@ public class PlayerControler : MonoBehaviour
     public bool shootButton;
     public bool jumpButton;
     public float jumpMultipler;
-    
+
 
     public bool IsGrounded;
     public Collider2D groundDetectionColl;
@@ -23,9 +23,9 @@ public class PlayerControler : MonoBehaviour
     public bool isMoving;
     public Transform firePoint;
 
-public void Start()
+    public void Start()
     {
-        
+
         GameManager.instance.controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
         GameManager.instance.controls.Player.Movement.canceled += ctx => move = Vector2.zero;
         GameManager.instance.controls.Player.Jump.started += ctx => jumpButton = true;
@@ -63,7 +63,7 @@ public void Start()
     }*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == groundColl)
+        if (collision == groundColl)
         {
             IsGrounded = true;
             anim.SetBool("isGrounded", true);
@@ -83,11 +83,11 @@ public void Start()
     // Update is called once per frame
     void Update()
     {
-        
+
         Debug.Log(aim);
         UpdateMoveAndAnimate();
-        Vector2 norAim = new(0,0);
-        if(aim.x != 0)
+        Vector2 norAim = new(0, 0);
+        if (aim.x != 0)
         {
             if (aim.x > 0)
             {
@@ -110,49 +110,41 @@ public void Start()
             }
         }
         //firePoint.rotation = Quaternion.LookRotation(new(0, 0, norAim.y + norAim.x));
-        Debug.Log("aim: "+norAim);
+        Debug.Log("aim: " + norAim);
         anim2.SetFloat("aim-x", norAim.x);
         anim2.SetFloat("aim-y", norAim.y);
         float newAim = 0;
-        if (norAim.x > norAim.y)
+        switch (norAim.x, norAim.y)
         {
-            if (norAim.y > 0)
-            {
-                newAim = 90;
-            }
-            else
-            {
-                newAim = 180;
-            }
-            if (norAim.x > 0)
-            {
-               
+            case(1,0):
                 newAim = 0;
-            }
-            else
-            {
-                newAim = 270;
-            }
-        }
-        else
-        {
-            if (norAim.x > 0)
-            {
+                break;
+            case (1, 1):
+                newAim = 45;
+                break;
+            case (0, 1):
                 newAim = 90;
-            }
-            else
-            {
-                newAim = 270;
-            }
-            if (norAim.y > 0)
-            {
-                newAim = 0;
-            }
-            else
-            {
+                break ;
+            case (1, -1):
+                newAim = -45;
+                break;
+            case(0, -1):
+                newAim = -90;
+                break;
+            case (-1, -1):
+                newAim = -135;
+                break;
+            case (-1, 1):
+                newAim = 135;
+                break;
+            case (-1, 0):
                 newAim = 180;
-            }
+                break;
+            default:
+                break;
         }
+
+
         firePoint.eulerAngles = new(firePoint.eulerAngles.x, firePoint.eulerAngles.y, newAim);
     }
     void Fire()
