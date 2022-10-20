@@ -19,7 +19,7 @@ public class PlayerControler : MonoBehaviour
     public Collider2D groundDetectionColl;
     public Collider2D groundColl;
     public Collider2D defColl;
-
+    public bool isMoving;
 
 
 public void Awake()
@@ -64,6 +64,8 @@ public void Awake()
         if(collision == groundColl)
         {
             IsGrounded = true;
+            anim.SetBool("isGrounded", true);
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -71,20 +73,29 @@ public void Awake()
         if (collision == groundColl)
         {
             IsGrounded = false;
+            anim.SetBool("isGrounded", false);
+
         }
     }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateMoveAndAnimate();
+        
+    }
+    void Fire()
+    {
+
     }
     void UpdateMoveAndAnimate()
     {
+        anim.SetFloat("move-x", move.x);
         Debug.Log("isGrounded: "+IsGrounded);
         Debug.Log("jump :"+jumpButton);
         move = move.normalized;
@@ -97,10 +108,19 @@ public void Awake()
         {
             rb.velocity = new(rb.velocity.x, rb.velocity.y + jumpMultipler);
         }
-
+        Debug.Log(move.magnitude);
         if (move.magnitude != 0)
         {
+            anim.SetBool("isMoving", true);
             rb.velocity = new(move.x * moveSpeedMultipler, rb.velocity.y);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
+        if (jumpButton == true)
+        {
+            jumpButton = false;
         }
     }
 }
