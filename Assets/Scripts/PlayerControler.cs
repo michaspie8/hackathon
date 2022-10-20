@@ -7,9 +7,10 @@ public class PlayerControler : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Vector2 move;
+    public Vector2 aim;
     public float moveSpeedMultipler;
     public Animator anim;
-    bool _IsJumping;
+    bool shootButton;
     bool jumpButton;
     public float jumpMultipler;
     
@@ -28,6 +29,11 @@ public void Awake()
         GameManager.instance.controls.Player.Movement.canceled += ctx => move = Vector2.zero;
         GameManager.instance.controls.Player.Jump.started += ctx => jumpButton = true;
         GameManager.instance.controls.Player.Jump.canceled += ctx => jumpButton = false;
+        GameManager.instance.controls.Player.Aim.performed += ctx => aim = ctx.ReadValue<Vector2>();
+        GameManager.instance.controls.Player.Aim.canceled += ctx => move = Vector2.zero;
+        GameManager.instance.controls.Player.Shoot.started += ctx => shootButton = true;
+        GameManager.instance.controls.Player.Shoot.canceled += ctx => shootButton = false;
+
 
     }
     /*private void OnCollisionEnter2D(Collision2D collision)
