@@ -7,13 +7,14 @@ public class Weapon : MonoBehaviour
 	public Transform firePoint;
 	public GameObject bulletPrefab;
 
-    private void Awake()
+    private void Start()
     {
 		GameManager.instance.controls.Player.Shoot.performed += ctx => Shoot();
 	}
+	
 
 	void Shoot()
 	{
-		Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+		Instantiate(bulletPrefab, firePoint.position, GameManager.instance.player.GetComponent<PlayerControler>().firePoint.rotation);
 	}
 }

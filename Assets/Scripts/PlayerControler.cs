@@ -20,9 +20,9 @@ public class PlayerControler : MonoBehaviour
     public Collider2D groundColl;
     public Collider2D defColl;
     public bool isMoving;
+    public Transform firePoint;
 
-
-public void Awake()
+public void Start()
     {
         
         GameManager.instance.controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
@@ -34,7 +34,8 @@ public void Awake()
         GameManager.instance.controls.Player.Shoot.started += ctx => shootButton = true;
         GameManager.instance.controls.Player.Shoot.canceled += ctx => shootButton = false;
 
-
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     /*private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -77,17 +78,12 @@ public void Awake()
 
         }
     }
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-    }
 
     // Update is called once per frame
     void Update()
     {
         UpdateMoveAndAnimate();
-        
+        firePoint.eulerAngles = new(firePoint.eulerAngles.x, Vector2.Angle(Vector2.zero, aim), firePoint.eulerAngles.z);
     }
     void Fire()
     {
